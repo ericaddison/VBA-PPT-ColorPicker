@@ -16,19 +16,8 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '*************************************************************
-' Types
-
-Private Type myColor
-    red As Integer
-    green As Integer
-    blue As Integer
-End Type
-
-
-'*************************************************************
 ' Attributes
-
-Private SelectedColor As myColor
+Private SelectedColor As ColorPickerUtils.PickColor
 Private MyStandardColors As New Collection
 
 
@@ -161,15 +150,6 @@ Private Function setColor(ByRef text As String, ByRef color As Integer) As Integ
         End If
     On Error GoTo 0
     setColor = color
-End Function
-
-' get separate R-G-B values from a color stored as a Long
-Private Function GetRGBFromLong(ByVal color As Long) As myColor
-    Dim newColor As myColor
-    newColor.red = color Mod 256
-    newColor.green = color \ 256 Mod 256
-    newColor.blue = color \ (65536) Mod 256
-    GetRGBFromLong = newColor
 End Function
 
 
