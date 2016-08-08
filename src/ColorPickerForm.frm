@@ -19,9 +19,9 @@ Option Explicit
 ' Types
 
 Private Type myColor
-    Red As Integer
-    Green As Integer
-    Blue As Integer
+    red As Integer
+    green As Integer
+    blue As Integer
 End Type
 
 
@@ -36,9 +36,9 @@ Private MyStandardColors As New Collection
 ' Initilialize
 
 Private Sub UserForm_Initialize()
-    SelectedColor.Red = 0
-    SelectedColor.Green = 0
-    SelectedColor.Blue = 0
+    SelectedColor.red = 0
+    SelectedColor.green = 0
+    SelectedColor.blue = 0
     updateColor
     setThemeColors
     setStandardColors
@@ -49,10 +49,10 @@ End Sub
 ' Public functions
 
 Public Function GetSelectedColor() As Long
-    If SelectedColor.Red = -1 Then
+    If SelectedColor.red = -1 Then
         GetSelectedColor = -1
     Else
-        GetSelectedColor = RGB(SelectedColor.Red, SelectedColor.Green, SelectedColor.Blue)
+        GetSelectedColor = RGB(SelectedColor.red, SelectedColor.green, SelectedColor.blue)
     End If
 End Function
 
@@ -66,17 +66,17 @@ End Sub
 ' TextBox functions
 
 Private Sub RedBox_Change()
-    RedBox.text = setColor(RedBox.text, SelectedColor.Red)
+    RedBox.text = setColor(RedBox.text, SelectedColor.red)
     updateColor
 End Sub
 
 Private Sub GreenBox_Change()
-    GreenBox.text = setColor(GreenBox.text, SelectedColor.Green)
+    GreenBox.text = setColor(GreenBox.text, SelectedColor.green)
     updateColor
 End Sub
 
 Private Sub BlueBox_Change()
-    BlueBox.text = setColor(BlueBox.text, SelectedColor.Blue)
+    BlueBox.text = setColor(BlueBox.text, SelectedColor.blue)
     updateColor
 End Sub
 
@@ -85,32 +85,32 @@ End Sub
 ' Scrollbar functions
 
 Private Sub RedBar_Change()
-    SelectedColor.Red = RedBar.value
+    SelectedColor.red = RedBar.value
     updateColor
 End Sub
 
 Private Sub GreenBar_Change()
-    SelectedColor.Green = GreenBar.value
+    SelectedColor.green = GreenBar.value
     updateColor
 End Sub
 
 Private Sub BlueBar_Change()
-    SelectedColor.Blue = BlueBar.value
+    SelectedColor.blue = BlueBar.value
     updateColor
 End Sub
 
 Private Sub RedBar_Scroll()
-    SelectedColor.Red = RedBar.value
+    SelectedColor.red = RedBar.value
     updateColor
 End Sub
 
 Private Sub GreenBar_Scroll()
-    SelectedColor.Green = GreenBar.value
+    SelectedColor.green = GreenBar.value
     updateColor
 End Sub
 
 Private Sub BlueBar_Scroll()
-    SelectedColor.Blue = BlueBar.value
+    SelectedColor.blue = BlueBar.value
     updateColor
 End Sub
 
@@ -123,9 +123,9 @@ Private Sub OKButton_Click()
 End Sub
 
 Private Sub CancelButton_Click()
-    SelectedColor.Red = -1
-    SelectedColor.Blue = -1
-    SelectedColor.Green = -1
+    SelectedColor.red = -1
+    SelectedColor.blue = -1
+    SelectedColor.green = -1
     ColorPickerForm.Hide
 End Sub
 
@@ -135,13 +135,13 @@ End Sub
 
 ' set the color label background color
 Private Sub updateColor()
-    ColorLabel.BackColor = RGB(SelectedColor.Red, SelectedColor.Green, SelectedColor.Blue)
-    RedBox.value = SelectedColor.Red
-    RedBar.value = SelectedColor.Red
-    GreenBox.value = SelectedColor.Green
-    GreenBar.value = SelectedColor.Green
-    BlueBox.value = SelectedColor.Blue
-    BlueBar.value = SelectedColor.Blue
+    ColorLabel.BackColor = RGB(SelectedColor.red, SelectedColor.green, SelectedColor.blue)
+    RedBox.value = SelectedColor.red
+    RedBar.value = SelectedColor.red
+    GreenBox.value = SelectedColor.green
+    GreenBar.value = SelectedColor.green
+    BlueBox.value = SelectedColor.blue
+    BlueBar.value = SelectedColor.blue
 End Sub
 
 
@@ -166,9 +166,9 @@ End Function
 ' get separate R-G-B values from a color stored as a Long
 Private Function GetRGBFromLong(ByVal color As Long) As myColor
     Dim newColor As myColor
-    newColor.Red = color Mod 256
-    newColor.Green = color \ 256 Mod 256
-    newColor.Blue = color \ (65536) Mod 256
+    newColor.red = color Mod 256
+    newColor.green = color \ 256 Mod 256
+    newColor.blue = color \ (65536) Mod 256
     GetRGBFromLong = newColor
 End Function
 
