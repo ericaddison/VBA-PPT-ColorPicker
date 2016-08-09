@@ -8,7 +8,7 @@ This is a simple color picker for PowerPoint VBA. I couldn't find a built-in col
 It is fairly straight forward to use. Functions for launching the color chooser are in the `ColorPickerUtils` module:
 ```
 ColorPicker                ' Launch a ColorPicker with no initial color
-ColorPicker 1234           ' Launch a ColorPicker with intial color 1234
+ColorPicker 1234           ' Launch a ColorPicker with initial color 1234
 ColorPicker 100, 100, 100  ' Launch a ColorPicker with initial color RGB(100, 100, 100)
 ```
 
