@@ -1,6 +1,8 @@
 This is a simple color picker for PowerPoint VBA. I couldn't find a built-in color chooser for PowerPoint VBA, even though there IS one for Excel VBA (frustrating!), so I made this simple one that provides RGB editing with sliders, theme colors, and some standard colors.
 
-
+<p align="center">
+  <img src="https://github.com/ericaddison/VBA-PPT-ColorPicker/blob/gh-pages/img/screenShot.png?raw=true" alt="VBA-PPT-ColorPicker ScreenShot"/>
+</p>
 ### Launching the color picker
 It is fairly straight forward to use. Functions for launching the color chooser are in the `ColorPickerUtils` module. 
 
