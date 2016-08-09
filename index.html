@@ -28,18 +28,29 @@
 <h3>
 <a id="launching-the-color-picker" class="anchor" href="#launching-the-color-picker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Launching the color picker</h3>
 
-<p>It is fairly straight forward to use. Functions for launching the color chooser are in the <code>ColorPickerUtils</code> module. </p>
+<p>It is fairly straight forward to use. Functions for launching the color chooser are in the <code>ColorPickerUtils</code> module:</p>
 
-<p>To launch the color chooser without a default color, you just need to call: <code>ColorPicker</code></p>
-
-<p>To set a default color with a single <code>Long</code> value, call: <code>ColorPicker 1234</code></p>
-
-<p>To set a default color with red/green/blue values, call: <code>ColorPicker 100, 100, 100</code></p>
+<pre><code>ColorPicker                ' Launch a ColorPicker with no initial color
+ColorPicker 1234           ' Launch a ColorPicker with intial color 1234
+ColorPicker 100, 100, 100  ' Launch a ColorPicker with initial color RGB(100, 100, 100)
+</code></pre>
 
 <h3>
 <a id="getting-the-color" class="anchor" href="#getting-the-color" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting the color</h3>
 
-<p>After the color picker is closed, you can retrieve the selected color with <code>SelectedColor</code> from the <code>ColorPickerUtils</code> module. The color is returned as a <code>Long</code> value, which is how VBA prefers to pass colors around.</p>
+<p>There are two ways to retrieve the selected color. <code>ColorPicker</code> is a function that returns a the color as a <code>Long</code> value, which is how VBA prefers to pass colors around. Additionally, there is a <code>SelectedColor</code> function in <code>ColorPickerUtils</code> that returns the selected color as well:</p>
+
+<pre><code>Dim myColor As Long
+myColor = ColorPicker                     ' assign selected color directly from call to ColorPicker
+myColor = ColorPickerUtils.SelectedColor  ' assign from helper function
+</code></pre>
+
+<p><code>SelectedColor</code> will return as <code>-1</code> if the selection was cancelled.</p>
+
+<h3>
+<a id="alternative" class="anchor" href="#alternative" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Alternative</h3>
+
+<p>It is possible to launch a Microsoft system color dialog from <code>comdlg32.dll</code> which provides a very nice color chooser interface. Unfortunately, I was not able to get this dialog to set an initial color, or to position properly due to the inability to easily access the window handle for a UserForm or Window in VBA for PowerPoint. If you want to give it a try, though, here is a link to an old Microsoft article with code: <a href="https://support.microsoft.com/en-us/kb/153929">How To Use Color Dialog from COMDLG32.DLL</a>. </p>
 
 <h3>
 <a id="files" class="anchor" href="#files" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Files</h3>
