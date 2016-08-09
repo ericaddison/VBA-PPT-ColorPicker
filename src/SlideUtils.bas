@@ -1,28 +1,41 @@
 Attribute VB_Name = "SlideUtils"
 ' Various slide utilities that warrant their own function
 Option Explicit
-Private Const NO_SLIDE_IN_VIEW_ERROR_CODE As Long = -2147188160
 
 ' Insert a new slide in the active presentation one slide ahead
 ' of the current slide
 Function InsertSlide() As Slide
     ' make a new slide
     Dim curSlide As Slide
-    Set curSlide = CurrentSlide
-
+    Set curSlide = CurrentSlide("InsertSlide: Could not insert slide")
+    
+    If curSlide Is Nothing Then
+        Set InsertSlide = Nothing
+        Exit Function
+    End If
+    
     Set InsertSlide = ActivePresentation.Slides.AddSlide(curSlide.SlideIndex + 1, curSlide.CustomLayout)
     ActiveWindow.View.GotoSlide InsertSlide.SlideIndex
 End Function
 
 
 ' get the current slide
-Function CurrentSlide() As Slide
-    Dim curSlideIndex As Integer
-    On Error Resume Next
-        curSlideIndex = ActiveWindow.View.Slide.SlideIndex
-        If Err.Number = NO_SLIDE_IN_VIEW_ERROR_CODE Then
-            curSlideIndex = 1
-        End If
+' if any error occurs, such as PPT being in an
+' uncooperative view, then "Nothing" is returned
+' and an error message box is displayed with an optional message
+' if no message box is desired, pass in Message:="" empty string as input
+Function CurrentSlide(Optional Message As String = "Could not get current slide") As Slide
+    On Error GoTo SlideError
+       Set CurrentSlide = ActiveWindow.View.Slide
     On Error GoTo 0
-    Set CurrentSlide = ActivePresentation.Slides(curSlideIndex)
+    Exit Function
+    
+SlideError:
+    Set CurrentSlide = Nothing
+    If Not Message = "" Then
+        MsgBox Message
+    End If
+    
 End Function
+
+
