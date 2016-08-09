@@ -188,18 +188,18 @@ Private Sub setThemeColors()
         ThemeColor12.BackColor = MyStandardColors(12)
     Else
         With ActiveWindow.View.Slide.ThemeColorScheme
-            ThemeColor1.BackColor = .Colors(1)
-            ThemeColor2.BackColor = .Colors(2)
-            ThemeColor3.BackColor = .Colors(3)
-            ThemeColor4.BackColor = .Colors(4)
-            ThemeColor5.BackColor = .Colors(5)
-            ThemeColor6.BackColor = .Colors(6)
-            ThemeColor7.BackColor = .Colors(7)
-            ThemeColor8.BackColor = .Colors(8)
-            ThemeColor9.BackColor = .Colors(9)
-            ThemeColor10.BackColor = .Colors(10)
-            ThemeColor11.BackColor = .Colors(11)
-            ThemeColor12.BackColor = .Colors(12)
+            ThemeColor1.BackColor = .colors(1)
+            ThemeColor2.BackColor = .colors(2)
+            ThemeColor3.BackColor = .colors(3)
+            ThemeColor4.BackColor = .colors(4)
+            ThemeColor5.BackColor = .colors(5)
+            ThemeColor6.BackColor = .colors(6)
+            ThemeColor7.BackColor = .colors(7)
+            ThemeColor8.BackColor = .colors(8)
+            ThemeColor9.BackColor = .colors(9)
+            ThemeColor10.BackColor = .colors(10)
+            ThemeColor11.BackColor = .colors(11)
+            ThemeColor12.BackColor = .colors(12)
         End With
     End If
     
@@ -244,7 +244,7 @@ Private Sub setColorFromTheme(ByVal ind As MsoThemeColorSchemeIndex)
         ind = ((ind - 1) Mod MyStandardColors.Count) + 1
         SelectedColor = GetRGBFromLong(MyStandardColors(ind))
     Else
-        SelectedColor = GetRGBFromLong(curSlide.ThemeColorScheme.Colors(ind))
+        SelectedColor = GetRGBFromLong(curSlide.ThemeColorScheme.colors(ind))
     End If
     updateColor
 End Sub

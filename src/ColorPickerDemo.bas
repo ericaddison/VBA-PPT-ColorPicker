@@ -2,13 +2,13 @@ Attribute VB_Name = "ColorPickerDemo"
 Option Explicit
 
 Sub DemoNoArgs()
-    ColorPicker
-    DemoShowColorMessage ColorPickerUtils.SelectedColor
+    Dim myColor As Long
+    myColor = ColorPicker
+    DemoShowColorMessage myColor
 End Sub
 
 Sub DemoOneLong()
-    ColorPicker 1234
-    DemoShowColorMessage ColorPickerUtils.SelectedColor
+    DemoShowColorMessage ColorPicker(1234)
 End Sub
 
 Sub DemoThreeLongs()
@@ -26,3 +26,4 @@ Sub DemoShowColorMessage(ByVal color As Long)
             ", " & myColor.green & ", " & myColor.blue & ")"
             
 End Sub
+

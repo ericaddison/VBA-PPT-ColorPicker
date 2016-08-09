@@ -12,8 +12,8 @@ End Type
 ' 1) no arguments: initial color is black
 ' 2) 1 Long argument: intial color set with Long color value
 ' 3) 3 Long arguments: initial color set with RGB(red,green,blue)
-Public Sub ColorPicker(Optional ByVal red As Long = -1, _
-        Optional ByVal green As Long = -1, Optional ByVal blue As Long = -1)
+Public Function ColorPicker(Optional ByVal red As Long = -1, _
+        Optional ByVal green As Long = -1, Optional ByVal blue As Long = -1) As Long
     Load ColorPickerForm
     ColorPickerForm.resetForm
     If Not red = -1 Then
@@ -24,11 +24,11 @@ Public Sub ColorPicker(Optional ByVal red As Long = -1, _
         End If
     End If
     ColorPickerForm.Show
-End Sub
-
+    ColorPicker = ColorPickerForm.GetSelectedColor
+End Function
 
 Public Function SelectedColor() As Long
-    SelectedColor = ColorPickerForm.GetSelectedColor
+    SelectedColor = ResultColor
 End Function
 
 ' get separate R-G-B values from a color stored as a Long
