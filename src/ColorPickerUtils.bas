@@ -7,6 +7,8 @@ Public Type PickColor
     blue As Integer
 End Type
 
+Private pColor As Long
+
 
 ' Launch a color picker form in one of three ways:
 ' 1) no arguments: initial color is black
@@ -25,10 +27,12 @@ Public Function ColorPicker(Optional ByVal red As Long = -1, _
     End If
     ColorPickerForm.Show
     ColorPicker = ColorPickerForm.GetSelectedColor
+    pColor = ColorPickerForm.GetSelectedColor
+    Unload ColorPickerForm
 End Function
 
 Public Function SelectedColor() As Long
-    SelectedColor = ResultColor
+    SelectedColor = pColor
 End Function
 
 ' get separate R-G-B values from a color stored as a Long
@@ -39,6 +43,8 @@ Public Function GetRGBFromLong(ByVal color As Long) As PickColor
     newColor.blue = color \ (65536) Mod 256
     GetRGBFromLong = newColor
 End Function
+
+
 
 
 
