@@ -16,6 +16,13 @@ Sub DemoThreeLongs()
     DemoShowColorMessage ColorPickerUtils.SelectedColor
 End Sub
 
+Sub DemoClickShape(shp As Shape)
+    Dim newColor As Long
+    newColor = ColorPicker(shp.Fill.ForeColor.RGB)
+    shp.Fill.ForeColor.RGB = newColor
+End Sub
+
+
 Sub DemoShowColorMessage(ByVal color As Long)
     Dim myColor As ColorPickerUtils.PickColor
     myColor = ColorPickerUtils.GetRGBFromLong(color)
