@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ColorPickerForm 
    Caption         =   "Color Picker"
-   ClientHeight    =   4620
+   ClientHeight    =   5415
    ClientLeft      =   30
    ClientTop       =   360
    ClientWidth     =   4800
@@ -20,6 +20,7 @@ Option Explicit
 '*************************************************************
 ' Attributes
 Private SelectedColor As ColorPickerUtils.PickColor
+Private InitColor As ColorPickerUtils.PickColor
 Private MyStandardColors As New Collection
 
 '*************************************************************
@@ -51,6 +52,12 @@ Public Sub SetSelectedColor(ByVal color As Long)
     updateColor
 End Sub
 
+Public Sub SetInitColor(ByVal color As Long)
+    SelectedColor = GetRGBFromLong(color)
+    InitColor = GetRGBFromLong(color)
+    updateColor
+End Sub
+
 
 '*************************************************************
 ' TextBox functions
@@ -77,38 +84,45 @@ Private Sub LongBox_Change()
     On Error GoTo 0
 End Sub
 
-
+Private Sub HexBox_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    On Error Resume Next
+        If KeyCode = 13 Then
+            SelectedColor = GetRGBFromHex(HexBox.value)
+            updateColor
+        End If
+    On Error GoTo 0
+End Sub
 
 '*************************************************************
 ' Scrollbar functions
 
 Private Sub RedBar_Change()
-    SelectedColor.red = RedBar.Value
+    SelectedColor.red = RedBar.value
     updateColor
 End Sub
 
 Private Sub GreenBar_Change()
-    SelectedColor.green = GreenBar.Value
+    SelectedColor.green = GreenBar.value
     updateColor
 End Sub
 
 Private Sub BlueBar_Change()
-    SelectedColor.blue = BlueBar.Value
+    SelectedColor.blue = BlueBar.value
     updateColor
 End Sub
 
 Private Sub RedBar_Scroll()
-    SelectedColor.red = RedBar.Value
+    SelectedColor.red = RedBar.value
     updateColor
 End Sub
 
 Private Sub GreenBar_Scroll()
-    SelectedColor.green = GreenBar.Value
+    SelectedColor.green = GreenBar.value
     updateColor
 End Sub
 
 Private Sub BlueBar_Scroll()
-    SelectedColor.blue = BlueBar.Value
+    SelectedColor.blue = BlueBar.value
     updateColor
 End Sub
 
@@ -121,9 +135,7 @@ Private Sub OKButton_Click()
 End Sub
 
 Private Sub CancelButton_Click()
-    SelectedColor.red = -1
-    SelectedColor.blue = -1
-    SelectedColor.green = -1
+    SelectedColor = InitColor
     ColorPickerForm.Hide
 End Sub
 
@@ -135,16 +147,16 @@ End Sub
 Private Sub updateColor()
     With SelectedColor
         ColorLabel.BackColor = RGB(.red, .green, .blue)
-        LongBox.Value = RGB(.red, .green, .blue)
-        RedBox.Value = .red
-        RedBar.Value = .red
-        GreenBox.Value = .green
-        GreenBar.Value = .green
-        BlueBox.Value = .blue
-        BlueBar.Value = .blue
+        LongBox.value = RGB(.red, .green, .blue)
+        HexBox.value = GetHexFromRGB(SelectedColor)
+        RedBox.value = .red
+        RedBar.value = .red
+        GreenBox.value = .green
+        GreenBar.value = .green
+        BlueBox.value = .blue
+        BlueBar.value = .blue
     End With
 End Sub
-
 
 ' set the color to the value parsed from text, with limits of
 ' 0-255

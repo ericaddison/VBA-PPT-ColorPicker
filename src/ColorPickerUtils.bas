@@ -20,9 +20,9 @@ Public Function ColorPicker(Optional ByVal red As Long = -1, _
     ColorPickerForm.resetForm
     If Not red = -1 Then
         If (green = -1 And blue = -1) Then
-            ColorPickerForm.SetSelectedColor red
+            ColorPickerForm.SetInitColor red
         Else
-            ColorPickerForm.SetSelectedColor RGB(red, green, blue)
+            ColorPickerForm.SetInitColor RGB(red, green, blue)
         End If
     End If
     ColorPickerForm.Show
@@ -44,7 +44,19 @@ Public Function GetRGBFromLong(ByVal color As Long) As PickColor
     GetRGBFromLong = newColor
 End Function
 
+Function GetHexFromRGB(color As PickColor) As String
+    Dim value As Long
+    value = color.blue + color.green * CLng(256) + color.red * CLng(65536)
+    GetHexFromRGB = Hex(value)
+    Do While Len(GetHexFromRGB) < 6
+        GetHexFromRGB = "0" & GetHexFromRGB
+    Loop
+End Function
 
+
+Function GetRGBFromHex(hexString As String) As PickColor
+    GetRGBFromHex = GetRGBFromLong(CLng("&H" & hexString))
+End Function
 
 
 
